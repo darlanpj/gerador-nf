@@ -1,6 +1,8 @@
 package br.com.itau.geradornotafiscal.web.controller;
 
 import br.com.itau.geradornotafiscal.model.NotaFiscal;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.itau.geradornotafiscal.model.Pedido;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Objects;
+
 @RestController
 @RequestMapping("/api/pedido")
 public class GeradorNFController {
@@ -19,15 +23,20 @@ public class GeradorNFController {
 	@Autowired
 	private GeradorNotaFiscalService notaFiscalService;
 
+	private static final Log LOG = LogFactory.getLog(GeradorNFController.class);
+
 	@PostMapping("/gerarNotaFiscal")
 	public ResponseEntity<NotaFiscal> gerarNotaFiscal(@RequestBody Pedido pedido) {
 		// Lógica de processamento do pedido
 		// Aqui você pode realizar as operações desejadas com o objeto Pedido
 
-		// Exemplo de retorno
-		String mensagem = "Nota fiscal gerada com sucesso para o pedido: " + pedido.getIdPedido();
+		if(Objects.isNull(pedido)){
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
+
 		NotaFiscal notaFiscal = notaFiscalService.gerarNotaFiscal(pedido);
+
+		LOG.info("Nota fiscal gerada com sucesso para o pedido: " + pedido.getIdPedido());
 		return new ResponseEntity<>(notaFiscal, HttpStatus.OK);
 	}
-	
 }

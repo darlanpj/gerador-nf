@@ -13,22 +13,23 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 public class Pedido {
-	 @JsonProperty("id_pedido")
-	    private int idPedido;
 
-	    @JsonProperty("data")
-	    private LocalDate data;
+    @JsonProperty("id_pedido")
+    private int idPedido;
 
-	    @JsonProperty("valor_total_itens")
-	    private double valorTotalItens;
+    @JsonProperty("data")
+    private LocalDate data;
 
-	    @JsonProperty("valor_frete")
-	    private double valorFrete;
+    @JsonProperty("valor_total_itens")
+    private double valorTotalItens;
 
-	    @JsonProperty("itens")
-	    private List<Item> itens;
+    @JsonProperty("valor_frete")
+    private double valorFrete;
 
-	    @JsonProperty("destinatario")
-	    private Destinatario destinatario;
+    @JsonProperty("itens")
+    private List<Item> itens;
+
+    @JsonProperty("destinatario")
+    private Destinatario destinatario;
 
 }

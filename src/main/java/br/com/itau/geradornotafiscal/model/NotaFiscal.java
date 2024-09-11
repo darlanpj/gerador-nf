@@ -12,6 +12,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 public class NotaFiscal {
+
     @JsonProperty("id_nota_fiscal")
     private String idNotaFiscal;
 

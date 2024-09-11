@@ -15,6 +15,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Endereco {
+
     @JsonProperty("cep")
     private String cep;
 

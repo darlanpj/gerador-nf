@@ -13,20 +13,21 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Destinatario {
-	@JsonProperty("nome")
-	private String nome;
 
-	@JsonProperty("tipo_pessoa")
-	private TipoPessoa tipoPessoa;
+    @JsonProperty("nome")
+    private String nome;
 
-	@JsonProperty("regime_tributacao")
-	private RegimeTributacaoPJ regimeTributacao;
+    @JsonProperty("tipo_pessoa")
+    private TipoPessoa tipoPessoa;
 
-	@JsonProperty("documentos")
-	private List<Documento> documentos;
+    @JsonProperty("regime_tributacao")
+    private RegimeTributacaoPJ regimeTributacao;
 
-	@JsonProperty("enderecos")
-	private List<Endereco> enderecos;
+    @JsonProperty("documentos")
+    private List<Documento> documentos;
+
+    @JsonProperty("enderecos")
+    private List<Endereco> enderecos;
 
 }
 

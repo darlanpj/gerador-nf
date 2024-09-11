@@ -15,7 +15,7 @@ public class Documento {
 
     @JsonProperty("numero")
     private String numero;
+
     @JsonProperty("tipo")
     private TipoDocumento tipo;
-
 }

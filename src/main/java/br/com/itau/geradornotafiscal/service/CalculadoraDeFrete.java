@@ -16,18 +16,24 @@ public class CalculadoraDeFrete {
                 .orElse(null);
 
         double valorFrete = pedido.getValorFrete();
-        double valorFreteComPercentual =0;
+        double valorFreteComPercentual = getValorFreteComPercentual(regiao, valorFrete);
+
+        return valorFreteComPercentual;
+    }
+
+    private double getValorFreteComPercentual(Regiao regiao, double valorFrete) {
+        double valorFreteComPercentual = 0;
 
         if (regiao == Regiao.NORTE) {
-            valorFreteComPercentual = valorFrete * 1.08;
+            valorFreteComPercentual = valorFrete * Regiao.NORTE.getValorFrete();
         } else if (regiao == Regiao.NORDESTE) {
-            valorFreteComPercentual = valorFrete * 1.085;
+            valorFreteComPercentual = valorFrete *  Regiao.NORDESTE.getValorFrete();
         } else if (regiao == Regiao.CENTRO_OESTE) {
-            valorFreteComPercentual = valorFrete * 1.07;
+            valorFreteComPercentual = valorFrete * Regiao.CENTRO_OESTE.getValorFrete();
         } else if (regiao == Regiao.SUDESTE) {
-            valorFreteComPercentual = valorFrete * 1.048;
+            valorFreteComPercentual = valorFrete *  Regiao.SUDESTE.getValorFrete();
         } else if (regiao == Regiao.SUL) {
-            valorFreteComPercentual = valorFrete * 1.06;
+            valorFreteComPercentual = valorFrete * Regiao.SUL.getValorFrete();
         }
 
         return valorFreteComPercentual;

@@ -9,6 +9,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 public class ItemNotaFiscal {
+
     @JsonProperty("id_item")
     private String idItem;
 
