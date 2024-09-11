@@ -16,7 +16,24 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class GeradorNotaFiscalServiceImpl implements GeradorNotaFiscalService{
+public class GeradorNotaFiscalServiceImpl implements GeradorNotaFiscalService {
+
+	private EstoqueService estoqueService;
+	private RegistroService registroService;
+	private EntregaService entregaService;
+
+	private FinanceiroService financeiroService;
+
+	public GeradorNotaFiscalServiceImpl(EstoqueService estoque,
+										RegistroService registroService,
+										EntregaService entregaService,
+										FinanceiroService financeiroService){
+		this.entregaService = entregaService;
+		this.registroService = registroService;
+		this.estoqueService = estoque;
+		this.financeiroService = financeiroService;
+	}
+
 	@Override
 	public NotaFiscal gerarNotaFiscal(Pedido pedido) {
 
@@ -39,10 +56,10 @@ public class GeradorNotaFiscalServiceImpl implements GeradorNotaFiscalService{
 				.destinatario(pedido.getDestinatario())
 				.build();
 
-		new EstoqueService().enviarNotaFiscalParaBaixaEstoque(notaFiscal);
-		new RegistroService().registrarNotaFiscal(notaFiscal);
-		new EntregaService().agendarEntrega(notaFiscal);
-		new FinanceiroService().enviarNotaFiscalParaContasReceber(notaFiscal);
+		estoqueService.enviarNotaFiscalParaBaixaEstoque(notaFiscal);
+		registroService.registrarNotaFiscal(notaFiscal);
+		entregaService.agendarEntrega(notaFiscal);
+		financeiroService.enviarNotaFiscalParaContasReceber(notaFiscal);
 
 		return notaFiscal;
 	}

@@ -20,23 +20,25 @@ import java.util.Objects;
 @RequestMapping("/api/pedido")
 public class GeradorNFController {
 
-	@Autowired
-	private GeradorNotaFiscalService notaFiscalService;
+    private static final Log LOG = LogFactory.getLog(GeradorNFController.class);
+    private GeradorNotaFiscalService notaFiscalService;
 
-	private static final Log LOG = LogFactory.getLog(GeradorNFController.class);
+    public GeradorNFController(final GeradorNotaFiscalService notaFiscalService) {
+        this.notaFiscalService = notaFiscalService;
+    }
 
-	@PostMapping("/gerarNotaFiscal")
-	public ResponseEntity<NotaFiscal> gerarNotaFiscal(@RequestBody Pedido pedido) {
-		// Lógica de processamento do pedido
-		// Aqui você pode realizar as operações desejadas com o objeto Pedido
+    @PostMapping("/gerarNotaFiscal")
+    public ResponseEntity<NotaFiscal> gerarNotaFiscal(@RequestBody Pedido pedido) {
+        // Lógica de processamento do pedido
+        // Aqui você pode realizar as operações desejadas com o objeto Pedido
 
-		if(Objects.isNull(pedido)){
-			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-		}
+        if (Objects.isNull(pedido)) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
 
-		NotaFiscal notaFiscal = notaFiscalService.gerarNotaFiscal(pedido);
+        NotaFiscal notaFiscal = notaFiscalService.gerarNotaFiscal(pedido);
 
-		LOG.info("Nota fiscal gerada com sucesso para o pedido: " + pedido.getIdPedido());
-		return new ResponseEntity<>(notaFiscal, HttpStatus.OK);
-	}
+        LOG.info("Nota fiscal gerada com sucesso para o pedido: " + pedido.getIdPedido());
+        return new ResponseEntity<>(notaFiscal, HttpStatus.OK);
+    }
 }
