@@ -39,6 +39,6 @@ public class GeradorNFController {
         NotaFiscal notaFiscal = notaFiscalService.gerarNotaFiscal(pedido);
 
         LOG.info("Nota fiscal gerada com sucesso para o pedido: " + pedido.getIdPedido());
-        return new ResponseEntity<>(notaFiscal, HttpStatus.OK);
+        return new ResponseEntity<>(notaFiscal, HttpStatus.CREATED);
     }
 }

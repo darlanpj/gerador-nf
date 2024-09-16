@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: geradornotafiscal
+  labels:
+    app: geradornotafiscal
+spec:
+  selector:
+    app: geradornotafiscal
+  ports:
+    - name: web
+      port: 8080

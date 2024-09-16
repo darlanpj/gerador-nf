@@ -1,4 +1,4 @@
-package br.com.itau.calculadoratributos;
+package br.com.itau.calculadoratributos.service;
 
 import br.com.itau.geradornotafiscal.model.*;
 import br.com.itau.geradornotafiscal.model.enums.Finalidade;
@@ -6,7 +6,11 @@ import br.com.itau.geradornotafiscal.model.enums.Regiao;
 import br.com.itau.geradornotafiscal.model.enums.RegimeTributacaoPJ;
 import br.com.itau.geradornotafiscal.model.enums.TipoPessoa;
 import br.com.itau.geradornotafiscal.service.CalculadoraAliquotaProduto;
+import br.com.itau.geradornotafiscal.service.impl.EntregaService;
+import br.com.itau.geradornotafiscal.service.impl.EstoqueService;
+import br.com.itau.geradornotafiscal.service.impl.FinanceiroService;
 import br.com.itau.geradornotafiscal.service.impl.GeradorNotaFiscalServiceImpl;
+import br.com.itau.geradornotafiscal.service.impl.RegistroService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -25,12 +29,22 @@ public class GeradorNotaFiscalServiceImplTest {
     @Mock
     private CalculadoraAliquotaProduto calculadoraAliquotaProduto;
 
+    @Mock
+    private EntregaService entregaService;
+
+    @Mock
+    private EstoqueService estoqueService;
+
+    @Mock
+    private FinanceiroService financeiroService;
+
+    @Mock
+    private RegistroService  registroService;
+
     @BeforeEach
     public void setup() {
         MockitoAnnotations.openMocks(this);
     }
-
-
 
     @Test
     public void shouldGenerateNotaFiscalForTipoPessoaFisicaWithValorTotalItensLessThan500() {
