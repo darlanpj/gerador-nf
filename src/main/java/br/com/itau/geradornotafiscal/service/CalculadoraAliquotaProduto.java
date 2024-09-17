@@ -8,6 +8,7 @@ import br.com.itau.geradornotafiscal.model.enums.TipoPessoa;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class CalculadoraAliquotaProduto {
     private List<ItemNotaFiscal> itemNotaFiscalList = new ArrayList<>();
@@ -33,17 +34,21 @@ public class CalculadoraAliquotaProduto {
 
         final List<ItemNotaFiscal> itemNotaFiscalList = new ArrayList<>();
 
-        for (Item item : items) {
-            double valorTributo = item.getValorUnitario() * aliquotaPercentual;
-            ItemNotaFiscal itemNotaFiscal = ItemNotaFiscal.builder()
-                    .idItem(item.getIdItem())
-                    .descricao(item.getDescricao())
-                    .valorUnitario(item.getValorUnitario())
-                    .quantidade(item.getQuantidade())
-                    .valorTributoItem(valorTributo)
-                    .build();
-            itemNotaFiscalList.add(itemNotaFiscal);
+        if (Objects.nonNull(itemNotaFiscalList)) {
+
+            for (Item item : items) {
+                double valorTributo = item.getValorUnitario() * aliquotaPercentual;
+                ItemNotaFiscal itemNotaFiscal = ItemNotaFiscal.builder()
+                        .idItem(item.getIdItem())
+                        .descricao(item.getDescricao())
+                        .valorUnitario(item.getValorUnitario())
+                        .quantidade(item.getQuantidade())
+                        .valorTributoItem(valorTributo)
+                        .build();
+                itemNotaFiscalList.add(itemNotaFiscal);
+            }
         }
+
         return itemNotaFiscalList;
     }
 

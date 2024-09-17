@@ -1,16 +1,14 @@
 package br.com.itau.geradornotafiscal.service.impl;
 
 import br.com.itau.geradornotafiscal.model.NotaFiscal;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 @Service
-public class FinanceiroService {
-    public void enviarNotaFiscalParaContasReceber(NotaFiscal notaFiscal) {
-
+public class EstoqueServiceImpl {
+    public void enviarNotaFiscalParaBaixaEstoque(NotaFiscal notaFiscal) {
         try {
-            //Simula o envio da nota fiscal para o contas a receber
-            Thread.sleep(250);
+            //Simula envio de nota fiscal para baixa de estoque
+            Thread.sleep(380);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

@@ -1,36 +1,33 @@
 package br.com.itau.geradornotafiscal.service.impl;
 
 import br.com.itau.geradornotafiscal.model.*;
-import br.com.itau.geradornotafiscal.model.enums.Finalidade;
-import br.com.itau.geradornotafiscal.model.enums.Regiao;
 import br.com.itau.geradornotafiscal.model.enums.RegimeTributacaoPJ;
 import br.com.itau.geradornotafiscal.model.enums.TipoPessoa;
 import br.com.itau.geradornotafiscal.service.CalculadoraAliquotaProduto;
 import br.com.itau.geradornotafiscal.service.CalculadoraDeFrete;
 import br.com.itau.geradornotafiscal.service.GeradorNotaFiscalService;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
-@Service
+@Component
 public class GeradorNotaFiscalServiceImpl implements GeradorNotaFiscalService {
 
-	private EstoqueService estoqueService;
-	private RegistroService registroService;
-	private EntregaService entregaService;
+	private EstoqueServiceImpl estoqueServiceImpl;
+	private RegistroServiceImpl registroServiceImpl;
+	private EntregaServiceImpl entregaServiceImpl;
 
-	private FinanceiroService financeiroService;
+	private FinanceiroServiceImpl financeiroService;
 
-	public GeradorNotaFiscalServiceImpl(EstoqueService estoque,
-										RegistroService registroService,
-										EntregaService entregaService,
-										FinanceiroService financeiroService){
-		this.entregaService = entregaService;
-		this.registroService = registroService;
-		this.estoqueService = estoque;
+	public GeradorNotaFiscalServiceImpl(EstoqueServiceImpl estoque,
+										RegistroServiceImpl registroServiceImpl,
+										EntregaServiceImpl entregaServiceImpl,
+										FinanceiroServiceImpl financeiroService){
+		this.entregaServiceImpl = entregaServiceImpl;
+		this.registroServiceImpl = registroServiceImpl;
+		this.estoqueServiceImpl = estoque;
 		this.financeiroService = financeiroService;
 	}
 
@@ -56,9 +53,9 @@ public class GeradorNotaFiscalServiceImpl implements GeradorNotaFiscalService {
 				.destinatario(pedido.getDestinatario())
 				.build();
 
-		estoqueService.enviarNotaFiscalParaBaixaEstoque(notaFiscal);
-		registroService.registrarNotaFiscal(notaFiscal);
-		entregaService.agendarEntrega(notaFiscal);
+		estoqueServiceImpl.enviarNotaFiscalParaBaixaEstoque(notaFiscal);
+		registroServiceImpl.registrarNotaFiscal(notaFiscal);
+		entregaServiceImpl.agendarEntrega(notaFiscal);
 		financeiroService.enviarNotaFiscalParaContasReceber(notaFiscal);
 
 		return notaFiscal;

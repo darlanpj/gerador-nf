@@ -1,11 +1,10 @@
 package br.com.itau.geradornotafiscal.service.impl;
 
 import br.com.itau.geradornotafiscal.model.NotaFiscal;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RegistroService {
+public class RegistroServiceImpl {
     public void registrarNotaFiscal(NotaFiscal notaFiscal) {
 
         try {

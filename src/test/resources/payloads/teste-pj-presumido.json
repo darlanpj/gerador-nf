@@ -1,0 +1,39 @@
+{
+  "id_pedido": 1,
+  "data": "2022-05-01",
+  "valor_total_itens": 5840.0,
+  "valor_frete": 72.0,
+  "itens": [
+    {
+      "id_item": 1,
+      "descricao": "Monitor LCD SAMSUNG",
+      "valor_unitario": 730,
+      "quantidade": 8
+    }
+  ],
+  "destinatario": {
+    "nome": "John Doe",
+    "tipo_pessoa": "JURIDICA",
+    "regime_tributacao": "LUCRO_PRESUMIDO",
+    "documentos": [
+      {
+        "tipo": "CNPJ",
+        "numero": "49695613000180"
+      }
+    ],
+    "enderecos": [
+      {
+        "logradouro": "Rua Alameda das Dalias",
+        "numero": "122",
+        "complemento": "Casa 1",
+        "bairro": "Colina Verde",
+        "cidade": "Rondonopolise",
+        "estado": "MT",
+        "pais": "Brasil",
+        "cep": "78740440",
+        "finalidade": "ENTREGA",
+        "regiao": "CENTRO_OESTE"
+      }
+    ]
+  }
+}
