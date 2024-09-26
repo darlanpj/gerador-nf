@@ -5,25 +5,32 @@ import br.com.itau.geradornotafiscal.model.ItemNotaFiscal;
 import br.com.itau.geradornotafiscal.model.Pedido;
 import br.com.itau.geradornotafiscal.model.enums.RegimeTributacaoPJ;
 import br.com.itau.geradornotafiscal.model.enums.TipoPessoa;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class CalculadoraAliquotaProduto {
-    private List<ItemNotaFiscal> itemNotaFiscalList = new ArrayList<>();
+
+    private static final Logger logger = LoggerFactory.getLogger(CalculadoraAliquotaProduto.class);
 
 
     public List<ItemNotaFiscal> calcularAliquota(final TipoPessoa pessoa,
                                                  final RegimeTributacaoPJ regimeTributacaoPJ, final Pedido pedido) {
 
+        logger.info("Calculando aliquota para TipoPessoa: {}, RegimeTributacaoPJ: {}, Pedido: {}",
+                pessoa, regimeTributacaoPJ, pedido);
+
+
         if (pessoa == TipoPessoa.FISICA) {
-           return  calcularAliquota(pedido.getItens(),
+            return calcularAliquota(pedido.getItens(),
                     calculaAliquotaRequimeTributacaoPF(pedido.getValorTotalItens()));
 
         } else if (pessoa == TipoPessoa.JURIDICA) {
 
-           return calcularAliquota(pedido.getItens(),
+            return calcularAliquota(pedido.getItens(),
                     calculaAliquotaPeloRequimeTributacaoPJ(regimeTributacaoPJ, pedido));
         }
 
@@ -31,6 +38,7 @@ public class CalculadoraAliquotaProduto {
     }
 
     private List<ItemNotaFiscal> calcularAliquota(List<Item> items, double aliquotaPercentual) {
+        logger.info("Calculando aliquota para os items: {}, porcentagem aliquota: {}", items, aliquotaPercentual);
 
         final List<ItemNotaFiscal> itemNotaFiscalList = new ArrayList<>();
 
@@ -46,6 +54,7 @@ public class CalculadoraAliquotaProduto {
                         .valorTributoItem(valorTributo)
                         .build();
                 itemNotaFiscalList.add(itemNotaFiscal);
+                logger.debug("Item processado: {}", itemNotaFiscal);
             }
         }
 
@@ -54,6 +63,8 @@ public class CalculadoraAliquotaProduto {
 
     public final double calculaAliquotaPeloRequimeTributacaoPJ(final RegimeTributacaoPJ regimeTributacaoPJ,
                                                                final Pedido pedido) {
+        logger.info("Calculando aliquota para RegimeTributacaoPJ: {}, Pedido: {}", regimeTributacaoPJ, pedido);
+
         final var valorTotalItens = pedido.getValorTotalItens();
 
         if (regimeTributacaoPJ == RegimeTributacaoPJ.LUCRO_REAL) {
@@ -77,11 +88,15 @@ public class CalculadoraAliquotaProduto {
         } else {
             aliquota = 0.17;
         }
+
+        logger.info("Calculando aliquota para Pessoa Fisica com valorTotalItens: {},  aliquota: {}",
+                valorTotalItens, aliquota);
         return aliquota;
     }
 
 
     private double calculaAliquotaSimplesNacional(final double valorTotalItens) {
+
 
         double aliquota;
 
@@ -94,10 +109,14 @@ public class CalculadoraAliquotaProduto {
         } else {
             aliquota = 0.19;
         }
+
+        logger.info("Calculando aliquota para Simples Nacional com valorTotalItens: {}, aliquota: {}",
+                valorTotalItens, aliquota);
         return aliquota;
     }
 
     private double calculaAliquotaLucroReal(final double valorTotalItens) {
+
 
         double aliquota;
 
@@ -110,10 +129,14 @@ public class CalculadoraAliquotaProduto {
         } else {
             aliquota = 0.20;
         }
+
+        logger.info("Calculando aliquota para Lucro Real com valorTotalItens: {}, aliquota: {}",
+                valorTotalItens, aliquota);
         return aliquota;
     }
 
     private double calculaAliquotaLucroPresumido(final double valorTotalItens) {
+
         double aliquota;
 
         if (valorTotalItens < 1000) {
@@ -125,6 +148,9 @@ public class CalculadoraAliquotaProduto {
         } else {
             aliquota = 0.20;
         }
+
+        logger.info("Calculando aliquota para Lucro Presumido com valorTotalItens: {} , aliquota: {} ",
+                valorTotalItens, aliquota);
         return aliquota;
     }
 }
