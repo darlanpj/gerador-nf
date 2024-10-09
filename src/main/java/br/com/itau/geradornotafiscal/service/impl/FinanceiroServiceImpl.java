@@ -1,10 +1,11 @@
 package br.com.itau.geradornotafiscal.service.impl;
 
 import br.com.itau.geradornotafiscal.model.NotaFiscal;
+import br.com.itau.geradornotafiscal.service.facade.FinanceiroServiceFacade;
 import org.springframework.stereotype.Service;
 
 @Service
-public class FinanceiroServiceImpl {
+public class FinanceiroServiceImpl implements FinanceiroServiceFacade {
     public void enviarNotaFiscalParaContasReceber(NotaFiscal notaFiscal) {
 
         try {
