@@ -5,7 +5,6 @@ import br.com.itau.geradornotafiscal.model.enums.Finalidade;
 import br.com.itau.geradornotafiscal.model.enums.Regiao;
 import br.com.itau.geradornotafiscal.model.enums.RegimeTributacaoPJ;
 import br.com.itau.geradornotafiscal.model.enums.TipoPessoa;
-import br.com.itau.geradornotafiscal.service.CalculadoraAliquotaProduto;
 import br.com.itau.geradornotafiscal.service.impl.EntregaServiceImpl;
 import br.com.itau.geradornotafiscal.service.impl.EstoqueServiceImpl;
 import br.com.itau.geradornotafiscal.service.impl.FinanceiroServiceImpl;
@@ -115,15 +114,16 @@ public class GeradorNotaFiscalServiceImplTest {
         pedido.setValorFrete(valorFrete);
 
         Destinatario destinatario = new Destinatario();
-        destinatario.setTipoPessoa(tipoPessoa);
+        destinatario.tipoPessoa(tipoPessoa);
         if (regimeTributacao != null) {
-            destinatario.setRegimeTributacao(regimeTributacao);
+            destinatario.regimeTributacao().;
         }
 
         Endereco endereco = new Endereco();
         endereco.setFinalidade(Finalidade.ENTREGA);
         endereco.setRegiao(Regiao.SUDESTE);
-        destinatario.setEnderecos(Arrays.asList(endereco));
+        destinatario.
+        destinatario.enderecos(Arrays.asList(endereco));
 
         pedido.setDestinatario(destinatario);
 

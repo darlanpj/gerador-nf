@@ -36,11 +36,11 @@ public class GeradorNotaFiscalServiceImpl implements GeradorNotaFiscalService {
 	public NotaFiscal gerarNotaFiscal(Pedido pedido) {
 
 		Destinatario destinatario = pedido.getDestinatario();
-		TipoPessoa tipoPessoa = destinatario.getTipoPessoa();
+		TipoPessoa tipoPessoa = destinatario.tipoPessoa();
 
 		CalculadoraAliquotaProduto calculadoraAliquotaProduto = new CalculadoraAliquotaProduto();
 		CalculadoraDeFrete calculadoraDeFrete = new CalculadoraDeFrete();
-		RegimeTributacaoPJ regimeTributacaoPJ = pedido.getDestinatario().getRegimeTributacao();
+		RegimeTributacaoPJ regimeTributacaoPJ = pedido.getDestinatario().regimeTributacao();
 
 		// Create the NotaFiscal object
 		String idNotaFiscal = UUID.randomUUID().toString();

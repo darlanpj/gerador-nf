@@ -1,21 +1,10 @@
 package br.com.itau.geradornotafiscal.model;
 
 import br.com.itau.geradornotafiscal.model.enums.TipoDocumento;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
-public class Documento {
-
-    @JsonProperty("numero")
-    private String numero;
-
-    @JsonProperty("tipo")
-    private TipoDocumento tipo;
-}
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
+public record Documento(String numero,
+                        TipoDocumento tipo
+) {}

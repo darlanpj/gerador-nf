@@ -9,7 +9,7 @@ public class CalculadoraDeFrete {
 
     public double calcularFrete(final Pedido pedido) {
 
-        Regiao regiao = pedido.getDestinatario().getEnderecos().stream()
+        Regiao regiao = pedido.getDestinatario().enderecos().stream()
                 .filter(endereco -> endereco.getFinalidade() == Finalidade.ENTREGA || endereco.getFinalidade() == Finalidade.COBRANCA_ENTREGA)
                 .map(Endereco::getRegiao)
                 .findFirst()
